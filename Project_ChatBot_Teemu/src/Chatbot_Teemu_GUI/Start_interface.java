@@ -14,10 +14,15 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Start_interface extends JFrame {
 
 	private JPanel contentPane;
+	
+	Select_Interface select;
+	SignUp_interface signup;
 
 	/**
 	 * Launch the application.
@@ -39,7 +44,7 @@ public class Start_interface extends JFrame {
 	 * Create the frame.
 	 */
 	public Start_interface() {
-		setTitle("Chat BOT Teemu");
+		setTitle("Chat Bot Teemu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 601, 600);
 		contentPane = new JPanel();
@@ -51,18 +56,24 @@ public class Start_interface extends JFrame {
 		JLabel lblChatBotTeemu = new JLabel("Chat Bot Teemu");
 		
 		JButton btnNewButton_1 = new JButton("Create User");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				signup = new SignUp_interface();
+				signup.setVisible(true);
 			}
 		});
 		
 		
 		JButton btnChoseuser = new JButton("Chose User");
-		btnChoseuser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnChoseuser.addMouseListener(new MouseAdapter() {
+			
+			public void mousePressed(MouseEvent arg0) {
+				select = new Select_Interface();
+				select.setVisible(true);
 			}
 		});
-		
+
 		lblChatBotTeemu.setFont(font);
 		
 		font = new Font("Serif",Font.PLAIN, 20);

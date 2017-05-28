@@ -15,8 +15,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.FlowLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
-public class SignUp_GUI extends JFrame {
+public class SignUp_interface extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -29,7 +40,7 @@ public class SignUp_GUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SignUp_GUI frame = new SignUp_GUI();
+					SignUp_interface frame = new SignUp_interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,9 +52,10 @@ public class SignUp_GUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SignUp_GUI() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+	public SignUp_interface() {
+		setTitle("Chat Bot Teemu");
+		
+		setBounds(100, 100, 483, 384);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,6 +97,50 @@ public class SignUp_GUI extends JFrame {
 		);
 		
 		JButton btnOk = new JButton("OK");
+		btnOk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				try {
+					
+					File userfile = new File("User.txt");
+					
+					FileReader reader = new FileReader(userfile);
+					FileWriter writer = new FileWriter(userfile); 
+					
+					BufferedReader br = new BufferedReader(reader);
+					BufferedWriter bw = new BufferedWriter(writer);
+					
+					String text = "";
+					String line;
+	
+					while((line = br.readLine()) != null)
+					{
+						text += line; 
+					}
+					text += textField.getText();
+					System.out.println(line);
+					br.close();
+					
+					bw.write(text+"\n");
+					bw.close();
+					
+					
+					/*
+					FileOutputStream fileStream = new FileOutputStream("User.text");
+					ObjectOutputStream os = new ObjectOutputStream(fileStream);
+					os.writeObject(textField.getText()+"\n");
+					os.close();
+					*/
+					
+					
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		panel_2.add(btnOk);
 		
 		JButton btnCancel = new JButton("Cancel");

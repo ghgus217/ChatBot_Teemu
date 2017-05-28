@@ -16,6 +16,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Scrollbar;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
@@ -25,6 +33,8 @@ import java.awt.Font;
 public class Select_Interface extends JFrame {
 
 	private JPanel contentPane;
+	JPanel panel;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,13 +55,44 @@ public class Select_Interface extends JFrame {
 	 * Create the frame.
 	 */
 	public Select_Interface() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setTitle("Chat Bot Teemu");
+
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
+		
+		try
+		{
+			JButton bt;
+		
+			File userfile = new File("User.txt");
+		
+			FileReader reader = new FileReader(userfile);
+		
+			BufferedReader br = new BufferedReader(reader);
+		
+			String line;
+
+			while((line = br.readLine()) != null)
+			{
+				bt = new JButton();
+				bt.setText(line);
+				panel.add(bt);
+			}
+		
+			br.close();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		JScrollPane scr = new JScrollPane(panel);
 		JLabel lblNewLabel = new JLabel("Choose User");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,30 +121,10 @@ public class Select_Interface extends JFrame {
 					.addComponent(scr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(38, Short.MAX_VALUE))
 		);
-		
-		JButton button = new JButton("New button");
-		
-		JButton btnNewButton = new JButton("New button");
-		
-		JButton btnNewButton_1 = new JButton("New button");
-		
-		JButton btnNewButton_2 = new JButton("New button");
-		
-		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setFont(new Font("Microsoft YaHei", Font.PLAIN, 15));
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
-		panel.add(btnNewButton_3);
-		panel.add(btnNewButton_2);
-		panel.add(btnNewButton_1);
-		panel.add(btnNewButton);
-		
-		JButton btnNewButton_4 = new JButton("New button");
-		panel.add(btnNewButton_4);
-		panel.add(button);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	
+
 }
