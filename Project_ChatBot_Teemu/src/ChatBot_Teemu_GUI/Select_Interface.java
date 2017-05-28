@@ -1,4 +1,4 @@
-package Chatbot_Teemu_GUI;
+package ChatBot_Teemu_GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -34,19 +34,21 @@ import java.awt.Font;
 
 public class Select_Interface extends JFrame {
 
+	static Select_Interface frame;
 	private JPanel contentPane;
-	Chatting_interface ci;
+	static Chatting_interface ci;
+	static Start_interface si;
 	JPanel panel;
 	JButton bt;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void go() {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Select_Interface frame = new Select_Interface();
+					frame = new Select_Interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +63,7 @@ public class Select_Interface extends JFrame {
 	public Select_Interface() {
 		
 		setTitle("Chat Bot Teemu");
-
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,6 +93,7 @@ public class Select_Interface extends JFrame {
 					{
 						ci = new Chatting_interface();
 						ci.setVisible(true);
+						frame.setVisible(false);
 					}
 				}
 						);
@@ -111,33 +114,47 @@ public class Select_Interface extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		
+		JButton btnNewButton = new JButton("Back\r\n");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				si = new Start_interface();
+				si.setVisible(true);
+				frame.setVisible(false);
+			}
+		});
+		btnNewButton.setFont(new Font("±¼¸²", Font.BOLD, 20));
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(scr, GroupLayout.PREFERRED_SIZE, 391, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(121)
-							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(21, Short.MAX_VALUE))
+					.addContainerGap()
+					.addComponent(scr, GroupLayout.PREFERRED_SIZE, 391, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+					.addComponent(btnNewButton)
+					.addGap(37))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(11)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNewButton))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(38, Short.MAX_VALUE))
+					.addContainerGap(191, Short.MAX_VALUE))
 		);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		contentPane.setLayout(gl_contentPane);
 	}
-	
-	
-
 }

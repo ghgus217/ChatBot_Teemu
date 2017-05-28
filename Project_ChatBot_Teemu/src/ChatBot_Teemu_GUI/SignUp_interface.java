@@ -1,4 +1,4 @@
-package Chatbot_Teemu_GUI;
+package ChatBot_Teemu_GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -36,7 +36,7 @@ public class SignUp_interface extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void go() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

@@ -1,4 +1,4 @@
-package Chatbot_Teemu_GUI;
+package ChatBot_Teemu_GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -26,7 +26,7 @@ public class Chatting_interface extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void go() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -114,6 +114,15 @@ public class Chatting_interface extends JFrame {
 		});
 		btnExit.setFont(new Font("Serif", Font.PLAIN, 20));
 		
+		JButton btnSend = new JButton("Send");
+		btnSend.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		btnSend.setFont(new Font("Serif", Font.PLAIN, 20));
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -121,8 +130,8 @@ public class Chatting_interface extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 684, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+							.addGroup(gl_contentPane.createSequentialGroup()
 								.addComponent(btnNewButton_3)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
@@ -132,13 +141,19 @@ public class Chatting_interface extends JFrame {
 								.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
 								.addGap(18)
 								.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addComponent(textField_1, Alignment.LEADING, 683, 683, 683)))
-					.addGap(17)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnSdkjsakdalsjkdlkjas, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-						.addComponent(btnUserInformation, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnHelp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-					.addGap(49))
+							.addComponent(textField_1, 683, 683, 683)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(17)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnSdkjsakdalsjkdlkjas, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+								.addComponent(btnUserInformation, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnHelp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+							.addGap(49))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -152,28 +167,34 @@ public class Chatting_interface extends JFrame {
 								.addGap(263)
 								.addComponent(btnHelp, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
 							.addComponent(btnSdkjsakdalsjkdlkjas, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-					.addGap(45)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED))
+							.addGap(45)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnSamplecode, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED))
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-										.addGap(34))
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED))))))
-					.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-					.addContainerGap())
+										.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.RELATED))
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addComponent(btnSamplecode, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED))
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+												.addGap(34))
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED))))))
+							.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(33))))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

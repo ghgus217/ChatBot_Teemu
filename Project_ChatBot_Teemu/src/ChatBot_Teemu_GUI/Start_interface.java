@@ -1,4 +1,4 @@
-package Chatbot_Teemu_GUI;
+package ChatBot_Teemu_GUI;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -19,19 +19,24 @@ import java.awt.event.MouseEvent;
 
 public class Start_interface extends JFrame {
 
-	private JPanel contentPane;
+	static Start_interface frame;
 	
 	Select_Interface select;
 	SignUp_interface signup;
 
+	JPanel contentPane;
+	JLabel titlelabel;
+	JButton createUser;
+	JButton chooseUser;
+	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public void go() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Start_interface frame = new Start_interface();
+					frame = new Start_interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,10 +58,10 @@ public class Start_interface extends JFrame {
 		
 		Font font = new Font("Serif",Font.PLAIN, 50);
 		
-		JLabel lblChatBotTeemu = new JLabel("Chat Bot Teemu");
+		titlelabel = new JLabel("Chat Bot Teemu");
 		
-		JButton btnNewButton_1 = new JButton("Create User");
-		btnNewButton_1.addMouseListener(new MouseAdapter() {
+		createUser = new JButton("Create User");
+		createUser.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				signup = new SignUp_interface();
@@ -65,44 +70,45 @@ public class Start_interface extends JFrame {
 		});
 		
 		
-		JButton btnChoseuser = new JButton("Chose User");
-		btnChoseuser.addMouseListener(new MouseAdapter() {
+		chooseUser = new JButton("Chose User");
+		chooseUser.addMouseListener(new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent arg0) {
 				select = new Select_Interface();
 				select.setVisible(true);
+				frame.setVisible(false);
 			}
 		});
 
-		lblChatBotTeemu.setFont(font);
+		titlelabel.setFont(font);
 		
 		font = new Font("Serif",Font.PLAIN, 20);
-		btnNewButton_1.setFont(font);
-		btnChoseuser.setFont(font);
+		createUser.setFont(font);
+		chooseUser.setFont(font);
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 					.addGap(78)
-					.addComponent(btnChoseuser, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+					.addComponent(chooseUser, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
 					.addGap(57)
-					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
+					.addComponent(createUser, GroupLayout.PREFERRED_SIZE, 177, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(80, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(123)
-					.addComponent(lblChatBotTeemu, GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+					.addComponent(titlelabel, GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
 					.addGap(115))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(84)
-					.addComponent(lblChatBotTeemu, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+					.addComponent(titlelabel, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnChoseuser, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
+						.addComponent(createUser, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
+						.addComponent(chooseUser, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE))
 					.addGap(142))
 		);
 		contentPane.setLayout(gl_contentPane);
