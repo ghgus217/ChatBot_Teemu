@@ -8,7 +8,9 @@ public class GUI_interface {
 	Chatting_interface chatting;
 	Userinfo_Interface userinfo;
 	
+	public void run()
+	{
+		start = new Start_interface();
+	}
 	
-	
-
 }

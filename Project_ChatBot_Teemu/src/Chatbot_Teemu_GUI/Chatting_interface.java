@@ -13,12 +13,15 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Chatting_interface extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	Userinfo_Interface uii;
 
 	/**
 	 * Launch the application.
@@ -63,6 +66,14 @@ public class Chatting_interface extends JFrame {
 		textField_1.setColumns(10);
 		
 		JButton btnUserInformation = new JButton("User Information");
+		btnUserInformation.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				uii = new Userinfo_Interface();
+				uii.setVisible(true);
+				
+			}
+		});
 		btnUserInformation.setFont(font);
 		
 		JButton btnHelp = new JButton("Help");

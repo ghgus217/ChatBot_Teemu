@@ -16,6 +16,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Scrollbar;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,12 +35,14 @@ import java.awt.Font;
 public class Select_Interface extends JFrame {
 
 	private JPanel contentPane;
+	Chatting_interface ci;
 	JPanel panel;
-	
+	JButton bt;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -81,6 +85,15 @@ public class Select_Interface extends JFrame {
 			{
 				bt = new JButton();
 				bt.setText(line);
+				bt.addMouseListener(new MouseAdapter(){
+					@Override
+					public void mousePressed(MouseEvent arg0)
+					{
+						ci = new Chatting_interface();
+						ci.setVisible(true);
+					}
+				}
+						);
 				panel.add(bt);
 			}
 		
