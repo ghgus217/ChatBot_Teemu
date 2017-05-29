@@ -35,9 +35,9 @@ import java.awt.Font;
 public class Select_Interface extends JFrame {
 
 	static Select_Interface frame;
-	private JPanel contentPane;
 	static Chatting_interface ci;
 	static Start_interface si;
+	private JPanel contentPane;
 	JPanel panel;
 	JButton bt;
 	/**
