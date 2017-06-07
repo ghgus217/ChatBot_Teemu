@@ -17,9 +17,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Start_interface extends JFrame {
+public class Start_interface extends GUI implements FrameController{
 
-	static Start_interface frame;
+	private static Start_interface frame;
 	
 	Select_Interface select;
 	SignUp_interface signup;
@@ -36,7 +36,7 @@ public class Start_interface extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Start_interface();
+					frame = getStart_interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,9 @@ public class Start_interface extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public Start_interface() {
+		
 		setTitle("Chat Bot Teemu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 601, 600);
@@ -64,7 +66,7 @@ public class Start_interface extends JFrame {
 		createUser.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				signup = new SignUp_interface();
+				signup = SignUp_interface.getSignUp_interface();
 				signup.setVisible(true);
 			}
 		});
@@ -74,7 +76,7 @@ public class Start_interface extends JFrame {
 		chooseUser.addMouseListener(new MouseAdapter() {
 			
 			public void mousePressed(MouseEvent arg0) {
-				select = new Select_Interface();
+				select = Select_Interface.getSelect_Interface();
 				select.setVisible(true);
 				frame.setVisible(false);
 			}
@@ -113,4 +115,27 @@ public class Start_interface extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
+	
+	public static Start_interface  getStart_interface()
+	{
+		if(frame == null)
+			frame = new Start_interface();
+		
+		return frame;
+	}
+
+	@Override
+	public void setVisibleFrame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setInvisibleFrame() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }

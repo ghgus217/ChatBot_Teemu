@@ -32,12 +32,14 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 
-public class Select_Interface extends JFrame {
+public class Select_Interface extends GUI implements FrameController,ButtonController{
 
-	static Select_Interface frame;
-	static Chatting_interface ci;
-	static Start_interface si;
-	private JPanel contentPane;
+	private static Select_Interface frame;
+	
+	Chatting_interface ci;
+	Start_interface si;
+	
+	JPanel contentPane;
 	JPanel panel;
 	JButton bt;
 	/**
@@ -48,7 +50,7 @@ public class Select_Interface extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Select_Interface();
+					frame = getSelect_Interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -91,7 +93,7 @@ public class Select_Interface extends JFrame {
 					@Override
 					public void mousePressed(MouseEvent arg0)
 					{
-						ci = new Chatting_interface();
+						ci = Chatting_interface.getChatting_interface();
 						ci.setVisible(true);
 						frame.setVisible(false);
 					}
@@ -122,7 +124,7 @@ public class Select_Interface extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				si = new Start_interface();
+				si = Start_interface.getStart_interface();
 				si.setVisible(true);
 				frame.setVisible(false);
 			}
@@ -156,5 +158,43 @@ public class Select_Interface extends JFrame {
 		);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public static Select_Interface  getSelect_Interface()
+	{
+		if(frame == null)
+			frame = new Select_Interface();
+		
+		return frame;
+	}
+
+	@Override
+	public void setVisibleFrame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setInvisibleFrame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setVisibleButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setInvisibleButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setNameButton() {
+		// TODO Auto-generated method stub
+		
 	}
 }

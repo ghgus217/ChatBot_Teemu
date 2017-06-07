@@ -12,8 +12,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class Userinfo_Interface extends JFrame {
+public class Userinfo_Interface extends GUI {
 
+	Userinfo_Interface frame;
+	
 	private JPanel contentPane;
 	private JTextField textField;
 
@@ -24,7 +26,7 @@ public class Userinfo_Interface extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Userinfo_Interface frame = new Userinfo_Interface();
+					frame = new Userinfo_Interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -84,4 +86,5 @@ public class Userinfo_Interface extends JFrame {
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
+	
 }

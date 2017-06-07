@@ -16,7 +16,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Chatting_interface extends JFrame {
+public class Chatting_interface extends GUI implements FrameController,ButtonController{
+	
+	private static Chatting_interface frame;
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -30,7 +32,7 @@ public class Chatting_interface extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Chatting_interface frame = new Chatting_interface();
+					frame = getChatting_interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -197,5 +199,43 @@ public class Chatting_interface extends JFrame {
 							.addGap(33))))
 		);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public static Chatting_interface  getChatting_interface()
+	{
+		if(frame == null)
+			frame = new Chatting_interface();
+		
+		return frame;
+	}
+
+	@Override
+	public void setVisibleButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setInvisibleButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setNameButton() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setVisibleFrame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setInvisibleFrame() {
+		// TODO Auto-generated method stub
+		
 	}
 }

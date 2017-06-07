@@ -27,8 +27,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-public class SignUp_interface extends JFrame {
+public class SignUp_interface extends GUI implements FrameController{
 
+	private static SignUp_interface frame;
+	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JComboBox comboBox;
@@ -40,7 +42,7 @@ public class SignUp_interface extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SignUp_interface frame = new SignUp_interface();
+					frame = getSignUp_interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,6 +55,7 @@ public class SignUp_interface extends JFrame {
 	 * Create the frame.
 	 */
 	public SignUp_interface() {
+		
 		setTitle("Chat Bot Teemu");
 		
 		setBounds(100, 100, 483, 384);
@@ -110,18 +113,13 @@ public class SignUp_interface extends JFrame {
 					BufferedReader br = new BufferedReader(reader);
 					BufferedWriter bw = new BufferedWriter(writer);
 					
-					String text = "";
-					String line;
-	
-					while((line = br.readLine()) != null)
-					{
-						text += line; 
-					}
-					text += textField.getText();
+					String line = textField.getText();
+					
 					System.out.println(line);
+					
 					br.close();
 					
-					bw.write(text+"\n");
+					bw.append(line);
 					bw.close();
 					
 					
@@ -163,6 +161,26 @@ public class SignUp_interface extends JFrame {
 		});
 		panel.add(btnCheck);
 		contentPane.setLayout(gl_contentPane);
+	}
+	
+	public static SignUp_interface  getSignUp_interface()
+	{
+		if(frame == null)
+			frame = new SignUp_interface();
+		
+		return frame;
+	}
+
+	@Override
+	public void setVisibleFrame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setInvisibleFrame() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
