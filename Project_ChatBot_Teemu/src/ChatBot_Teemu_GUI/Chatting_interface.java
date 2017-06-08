@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import ChatBot_Teemu_User.User;
+import Chatbot_Teemu_Translator.Translator;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -27,11 +28,13 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 
 	private JPanel contentPane;
 	private JTextField textField_1;
+	private JTextArea textArea;
 	
 	Userinfo_Interface uii;
 	
-	User user;
-	
+	Translator ts = new Translator();
+
+	String user;
 
 	/**
 	 * Launch the application.
@@ -90,13 +93,6 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		});
 		btnHelp.setFont(font);
 		
-		JButton btnSdkjsakdalsjkdlkjas = new JButton("Lecture");
-		btnSdkjsakdalsjkdlkjas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnSdkjsakdalsjkdlkjas.setFont(font);
-		
 		JButton btnImage = new JButton("Image");
 		btnImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,6 +118,22 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		btnExit.setFont(new Font("Serif", Font.PLAIN, 20));
 		
 		JButton btnSend = new JButton("Send");
+		btnSend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String usertext = textField_1.getText();
+				textField_1.setText("");
+				
+				ts.setUserName(user);
+				
+				int index= ts.setUserText(usertext);
+				
+				
+				
+				ts.translate(index);
+				
+			}
+		});
 		btnSend.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -131,8 +143,11 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		btnSend.setFont(new Font("Serif", Font.PLAIN, 20));
 		
 		
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		JScrollPane sc = new JScrollPane(textArea);
+		
+		JButton btnLecture = new JButton("Lecture");
+		btnLecture.setFont(new Font("Serif", Font.PLAIN, 20));
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -158,9 +173,9 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(17)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnSdkjsakdalsjkdlkjas, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
 								.addComponent(btnUserInformation, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnHelp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
+								.addComponent(btnHelp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+								.addComponent(btnLecture, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
 							.addGap(49))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -176,13 +191,11 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 							.addComponent(sc, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnUserInformation, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(263)
-										.addComponent(btnHelp, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-									.addComponent(btnSdkjsakdalsjkdlkjas, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnUserInformation, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(76)
+							.addComponent(btnLecture, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+							.addGap(89)
+							.addComponent(btnHelp, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(45)
@@ -223,10 +236,10 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		return frame;
 	}
 	
-	public void setUser(User getinuser)
+	public void setUser(String user)
 	{
-		if(getinuser != null)
-			user = getinuser;
+		if(user != null)
+			this.user = user;
 	}
 
 	@Override
@@ -238,7 +251,6 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 	@Override
 	public void setInvisibleButton(JButton button) {
 		button.setVisible(false);
-		
 	}
 
 	@Override
@@ -256,4 +268,11 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 	public void setInvisibleFrame(JFrame frame) {
 		frame.setVisible(false);
 	}
+	
+	public JTextArea getJTextArea()
+	{
+		return this.textArea;
+	}
+	
+
 }

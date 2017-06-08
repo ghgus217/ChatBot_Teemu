@@ -153,6 +153,8 @@ public class SignUp_interface extends GUI implements FrameController{
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					
+					
 				}
 			}
 		});

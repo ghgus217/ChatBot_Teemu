@@ -5,9 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import ChatBot_Teemu_User.User;
+import Chatbot_Teemu_Translator.Translator;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -44,6 +46,7 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 	
 	Chatting_interface ci;
 	Start_interface si;
+	Translator ts = new Translator();
 	
 	JPanel contentPane;
 	JPanel panel;
@@ -96,46 +99,23 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 				bt = new JButton();
 				bt.setText(line);
 				
-				String username =bt.getName();
+				String username = line;
 				
 				bt.addMouseListener(new MouseAdapter(){
 					@Override
 					public void mousePressed(MouseEvent arg0)
 					{
-						User user = new User();
-						
-						try {
-							File userfile = new File(username+".txt");
-							FileReader reader = new FileReader(userfile);
-							BufferedReader br = new BufferedReader(reader);
-							
-							String line;
-							
-							while((line = br.readLine()) != null)
-							{
-								user.setUser_name(line);
-								Image uimg = new ImageIcon(line).getImage();
-								user.setUser_image(uimg);
-								user.setLecture_progress(Integer.parseInt(line));
-								user.setQuiz_progress(Integer.parseInt(line));
-								
-							}
-							
-							reader.close();
-							br.close();
-							
-						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						
 						ci = Chatting_interface.getChatting_interface();
 						ci.setVisible(true);
-						ci.setUser(user);
+						
+						ci.setUser(username);
+						
+						JTextArea ja = ci.getJTextArea();						
+						
+						ts.chatLoginitialization(ja,username);
+						
 						frame.setVisible(false);
+						
 					}
 				}
 						);
@@ -193,8 +173,8 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scr, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(27, Short.MAX_VALUE))
+					.addComponent(scr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(181, Short.MAX_VALUE))
 		);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		contentPane.setLayout(gl_contentPane);

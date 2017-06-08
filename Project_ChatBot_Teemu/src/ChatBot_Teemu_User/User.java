@@ -1,8 +1,9 @@
 package ChatBot_Teemu_User;
 
 import java.awt.Image;
+import java.io.Serializable;
 
-public class User {
+public class User implements Serializable{
 
 	private String user_name;
 	private Image user_image;

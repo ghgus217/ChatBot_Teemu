@@ -60,7 +60,7 @@ public class Start_interface extends GUI implements FrameController{
 		
 		Font font = new Font("Serif",Font.PLAIN, 50);
 		
-		titlelabel = new JLabel("");
+		titlelabel = new JLabel("Chat Bot Teemu");
 		
 		createUser = new JButton("Create User");
 		createUser.addMouseListener(new MouseAdapter() {
