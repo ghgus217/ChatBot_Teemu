@@ -35,5 +35,4 @@ public class User {
 		this.quiz_progress = quiz_progress;
 	}
 	
-	
 }

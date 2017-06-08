@@ -6,10 +6,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import ChatBot_Teemu_User.User;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.Image;
+
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JList;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -89,12 +95,46 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 			{
 				bt = new JButton();
 				bt.setText(line);
+				
+				String username =bt.getName();
+				
 				bt.addMouseListener(new MouseAdapter(){
 					@Override
 					public void mousePressed(MouseEvent arg0)
 					{
+						User user = new User();
+						
+						try {
+							File userfile = new File(username+".txt");
+							FileReader reader = new FileReader(userfile);
+							BufferedReader br = new BufferedReader(reader);
+							
+							String line;
+							
+							while((line = br.readLine()) != null)
+							{
+								user.setUser_name(line);
+								Image uimg = new ImageIcon(line).getImage();
+								user.setUser_image(uimg);
+								user.setLecture_progress(Integer.parseInt(line));
+								user.setQuiz_progress(Integer.parseInt(line));
+								
+							}
+							
+							reader.close();
+							br.close();
+							
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						ci = Chatting_interface.getChatting_interface();
 						ci.setVisible(true);
+						ci.setUser(user);
 						frame.setVisible(false);
 					}
 				}
@@ -135,15 +175,15 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
+					.addGap(28)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+					.addComponent(btnNewButton)
+					.addGap(37))
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(scr, GroupLayout.PREFERRED_SIZE, 391, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(28)
-					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-					.addComponent(btnNewButton)
-					.addGap(37))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -153,8 +193,8 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(191, Short.MAX_VALUE))
+					.addComponent(scr, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(27, Short.MAX_VALUE))
 		);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		contentPane.setLayout(gl_contentPane);
@@ -169,32 +209,32 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 	}
 
 	@Override
-	public void setVisibleFrame() {
+	public void setVisibleButton(JButton button) {
+		button.setVisible(true);
+		
+	}
+
+	@Override
+	public void setInvisibleButton(JButton button) {
+		button.setVisible(false);
+		
+	}
+
+	@Override
+	public void setNameButton(JButton button) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setInvisibleFrame() {
-		// TODO Auto-generated method stub
-		
+	public void setVisibleFrame(JFrame frame) {
+		frame.setVisible(true);
 	}
 
 	@Override
-	public void setVisibleButton() {
-		// TODO Auto-generated method stub
-		
+	public void setInvisibleFrame(JFrame frame) {
+		frame.setVisible(false);
 	}
 
-	@Override
-	public void setInvisibleButton() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void setNameButton() {
-		// TODO Auto-generated method stub
-		
-	}
 }

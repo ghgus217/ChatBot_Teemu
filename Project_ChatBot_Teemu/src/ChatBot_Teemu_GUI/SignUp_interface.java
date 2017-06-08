@@ -5,10 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import ChatBot_Teemu_User.User;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -71,8 +75,8 @@ public class SignUp_interface extends GUI implements FrameController{
 		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		
-		JLabel label = new JLabel("User Icon");
-		panel_1.add(label);
+		JLabel lblChooseUserIcon = new JLabel("Choose User Icon");
+		panel_1.add(lblChooseUserIcon);
 		
 		JPanel panel_2 = new JPanel();
 		FlowLayout flowLayout_2 = (FlowLayout) panel_2.getLayout();
@@ -103,39 +107,52 @@ public class SignUp_interface extends GUI implements FrameController{
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
-				try {
+				
+				//duplication check
+				if(frame.UnameDupcheck() == false)
+					JOptionPane.showMessageDialog(null, textField.getText() + " is already exsist User ID!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+				else if(frame.UnameDupcheck() == true)
+				{
+					try {
+						
+						//append new user In in User.txt file
+						File userfile = new File("User.txt");
+						
+						FileWriter writer = new FileWriter(userfile,true); 
+						
+						BufferedWriter bw = new BufferedWriter(writer);
+						
+						String line = textField.getText();
+						
+				
+						bw.append(line+"\n");
+						bw.close();
 					
-					File userfile = new File("User.txt");
+						
+						//create new user name text file
+						File newuser = new File(line+".txt");
+						FileWriter fw1 = new FileWriter(newuser);
 					
-					FileReader reader = new FileReader(userfile);
-					FileWriter writer = new FileWriter(userfile); 
-					
-					BufferedReader br = new BufferedReader(reader);
-					BufferedWriter bw = new BufferedWriter(writer);
-					
-					String line = textField.getText();
-					
-					System.out.println(line);
-					
-					br.close();
-					
-					bw.append(line);
-					bw.close();
-					
-					
-					/*
-					FileOutputStream fileStream = new FileOutputStream("User.text");
-					ObjectOutputStream os = new ObjectOutputStream(fileStream);
-					os.writeObject(textField.getText()+"\n");
-					os.close();
-					*/
-					
-					
-				} catch (FileNotFoundException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+						fw1.write(line+"\n");
+						
+						fw1.close();
+						
+						//create new chat log text file
+						File newchatlog = new File(line+"clog.txt");
+						FileWriter fw2 = new FileWriter(newchatlog);
+						
+						fw2.write("");
+						
+						fw2.close();
+						
+	
+						
+					} catch (FileNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		});
@@ -157,6 +174,10 @@ public class SignUp_interface extends GUI implements FrameController{
 		JButton btnCheck = new JButton("Duplication Check");
 		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(frame.UnameDupcheck() == false)
+					JOptionPane.showMessageDialog(null, textField.getText() + " is already exsist User ID!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+				else if(frame.UnameDupcheck() == true)
+					JOptionPane.showMessageDialog(null, textField.getText() + " is OK!", "Ok", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
 		panel.add(btnCheck);
@@ -172,15 +193,47 @@ public class SignUp_interface extends GUI implements FrameController{
 	}
 
 	@Override
-	public void setVisibleFrame() {
-		// TODO Auto-generated method stub
-		
+	public void setVisibleFrame(JFrame frame) {
+		frame.setVisible(true);
 	}
 
 	@Override
-	public void setInvisibleFrame() {
-		// TODO Auto-generated method stub
-		
+	public void setInvisibleFrame(JFrame frame) {
+		frame.setVisible(false);
 	}
+
+	public boolean UnameDupcheck()
+	{
+		
+		try {
+			
+			File userfile = new File("User.txt");
+			
+			FileReader reader = new FileReader(userfile);
+			
+			BufferedReader br = new BufferedReader(reader);
+			
+			String line;
+			
+			while((line = br.readLine()) != null)
+			{
+				if(line.compareTo(textField.getText())==0)
+					return false;
+			}
+			
+			reader.close();
+			br.close();
+			
+		} catch (FileNotFoundException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		return true;
+	}
+	
 
 }

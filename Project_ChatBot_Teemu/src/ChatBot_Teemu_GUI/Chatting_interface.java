@@ -5,7 +5,11 @@ import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+
+import ChatBot_Teemu_User.User;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -15,15 +19,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
 
 public class Chatting_interface extends GUI implements FrameController,ButtonController{
 	
 	private static Chatting_interface frame;
 
 	private JPanel contentPane;
-	private JTextField textField;
 	private JTextField textField_1;
+	
 	Userinfo_Interface uii;
+	
+	User user;
+	
 
 	/**
 	 * Launch the application.
@@ -51,9 +59,6 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		
-		textField = new JTextField();
-		textField.setColumns(10);
 		
 		Font font = new Font("Serif",Font.PLAIN,20);
 		
@@ -125,13 +130,16 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		});
 		btnSend.setFont(new Font("Serif", Font.PLAIN, 20));
 		
+		
+		JTextArea textArea = new JTextArea();
+		JScrollPane sc = new JScrollPane(textArea);
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 684, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 							.addGroup(gl_contentPane.createSequentialGroup()
 								.addComponent(btnNewButton_3)
@@ -143,7 +151,9 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 								.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
 								.addGap(18)
 								.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-							.addComponent(textField_1, 683, 683, 683)))
+							.addComponent(textField_1, 683, 683, 683))
+						.addComponent(sc, GroupLayout.PREFERRED_SIZE, 683, GroupLayout.PREFERRED_SIZE))
+					.addGap(1)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(17)
@@ -162,41 +172,45 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnUserInformation, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(263)
-								.addComponent(btnHelp, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-							.addComponent(btnSdkjsakdalsjkdlkjas, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(45)
+							.addComponent(sc, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED))
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnUserInformation, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED))
+										.addGap(263)
+										.addComponent(btnHelp, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+									.addComponent(btnSdkjsakdalsjkdlkjas, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addGap(45)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(btnSamplecode, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+											.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.RELATED))
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 											.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-												.addGap(34))
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED))))))
-							.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(33))))
+												.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(ComponentPlacement.RELATED))
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addComponent(btnSamplecode, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+													.addPreferredGap(ComponentPlacement.RELATED))
+												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+													.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+														.addGap(34))
+													.addGroup(gl_contentPane.createSequentialGroup()
+														.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+														.addPreferredGap(ComponentPlacement.RELATED))))))
+									.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+									.addContainerGap())
+								.addGroup(gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addGap(33))))))
 		);
 		contentPane.setLayout(gl_contentPane);
 	}
@@ -208,34 +222,38 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		
 		return frame;
 	}
+	
+	public void setUser(User getinuser)
+	{
+		if(getinuser != null)
+			user = getinuser;
+	}
 
 	@Override
-	public void setVisibleButton() {
+	public void setVisibleButton(JButton button) {
+		button.setVisible(true);
+		
+	}
+
+	@Override
+	public void setInvisibleButton(JButton button) {
+		button.setVisible(false);
+		
+	}
+
+	@Override
+	public void setNameButton(JButton button) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void setInvisibleButton() {
-		// TODO Auto-generated method stub
-		
+	public void setVisibleFrame(JFrame frame) {
+		frame.setVisible(true);
 	}
 
 	@Override
-	public void setNameButton() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setVisibleFrame() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setInvisibleFrame() {
-		// TODO Auto-generated method stub
-		
+	public void setInvisibleFrame(JFrame frame) {
+		frame.setVisible(false);
 	}
 }
