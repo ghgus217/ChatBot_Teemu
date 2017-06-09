@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 public class Userinfo_Interface extends GUI {
 
-	Userinfo_Interface frame;
+	private static Userinfo_Interface frame;
 	
 	private JPanel contentPane;
 	private JTextField textField;
@@ -26,7 +26,7 @@ public class Userinfo_Interface extends GUI {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Userinfo_Interface();
+					frame = Userinfo_Interface.getUserinfo_Interface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -87,4 +87,11 @@ public class Userinfo_Interface extends GUI {
 		contentPane.setLayout(gl_contentPane);
 	}
 	
+	public static Userinfo_Interface getUserinfo_Interface()
+	{
+		if(frame == null)
+			frame = new Userinfo_Interface();
+		
+		return frame;
+	}
 }

@@ -49,7 +49,7 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 	Translator ts = new Translator();
 	
 	JPanel contentPane;
-	JPanel panel;
+	JPanel panel = new JPanel();
 	JButton bt;
 	/**
 	 * Launch the application.
@@ -131,6 +131,7 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 			e.printStackTrace();
 		}
 		
+		
 		JScrollPane scr = new JScrollPane(panel);
 		JLabel lblNewLabel = new JLabel("Choose User");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -173,8 +174,8 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnNewButton))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scr, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(181, Short.MAX_VALUE))
+					.addComponent(scr, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(24, Short.MAX_VALUE))
 		);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		contentPane.setLayout(gl_contentPane);
@@ -215,6 +216,64 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 	public void setInvisibleFrame(JFrame frame) {
 		frame.setVisible(false);
 	}
+	
+	
+	public JPanel getpanel()
+	{
+		return panel;
+	}
 
 
+	public void ButtonCreater(JPanel panel)
+	{
+		try
+		{
+			panel.removeAll();
+			JButton bt;
+		
+			File userfile = new File("User.txt");
+		
+			FileReader reader = new FileReader(userfile);
+		
+			BufferedReader br = new BufferedReader(reader);
+		
+			String line;
+
+			while((line = br.readLine()) != null)
+			{
+				bt = new JButton();
+				bt.setText(line);
+				
+				String username = line;
+				
+				bt.addMouseListener(new MouseAdapter(){
+					@Override
+					public void mousePressed(MouseEvent arg0)
+					{
+						ci = Chatting_interface.getChatting_interface();
+						ci.setVisible(true);
+						
+						ci.setUser(username);
+						
+						JTextArea ja = ci.getJTextArea();						
+						
+						ts.chatLoginitialization(ja,username);
+						
+						frame.setVisible(false);
+						
+					}
+				}
+						);
+				panel.add(bt);
+			}
+		
+			br.close();
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

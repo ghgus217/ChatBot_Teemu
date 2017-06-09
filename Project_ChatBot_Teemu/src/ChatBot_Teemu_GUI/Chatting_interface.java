@@ -21,6 +21,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class Chatting_interface extends GUI implements FrameController,ButtonController{
 	
@@ -59,6 +62,24 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		setTitle("Chat Bot Teemu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 943, 611);
+		
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		
+		JMenu mnOption = new JMenu("Option");
+		menuBar.add(mnOption);
+		
+		JMenuItem mntmThema = new JMenuItem("Theme");
+		mnOption.add(mntmThema);
+		
+		JMenuItem mntmLogout = new JMenuItem("LogOut");
+		mnOption.add(mntmLogout);
+		
+		JMenu mnAbout = new JMenu("About");
+		menuBar.add(mnAbout);
+		
+		JMenuItem mntmHelp = new JMenuItem("Help");
+		mnAbout.add(mntmHelp);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -86,13 +107,6 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		});
 		btnUserInformation.setFont(font);
 		
-		JButton btnHelp = new JButton("Help");
-		btnHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnHelp.setFont(font);
-		
 		JButton btnImage = new JButton("Image");
 		btnImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -103,7 +117,7 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 		JButton btnSamplecode = new JButton("Code");
 		btnSamplecode.setFont(new Font("Serif", Font.PLAIN, 20));
 		
-		JButton btnClass = new JButton("Class");
+		JButton btnClass = new JButton("Quiz");
 		btnClass.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -158,27 +172,24 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 							.addGroup(gl_contentPane.createSequentialGroup()
 								.addComponent(btnNewButton_3)
-								.addPreferredGap(ComponentPlacement.RELATED)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
 								.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(btnSamplecode, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
+								.addGap(11)
 								.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
+								.addPreferredGap(ComponentPlacement.RELATED)
 								.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addComponent(textField_1, 683, 683, 683))
 						.addComponent(sc, GroupLayout.PREFERRED_SIZE, 683, GroupLayout.PREFERRED_SIZE))
-					.addGap(1)
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(17)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addComponent(btnUserInformation, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnHelp, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
 								.addComponent(btnLecture, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE))
 							.addGap(49))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
 							.addContainerGap())))
 		);
@@ -187,43 +198,25 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(sc, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())
+						.addComponent(sc, GroupLayout.PREFERRED_SIZE, 329, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(btnUserInformation, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 							.addGap(76)
 							.addComponent(btnLecture, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-							.addGap(89)
-							.addComponent(btnHelp, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(45)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED))
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-												.addPreferredGap(ComponentPlacement.RELATED))
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_contentPane.createSequentialGroup()
-													.addComponent(btnSamplecode, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-													.addPreferredGap(ComponentPlacement.RELATED))
-												.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-													.addGroup(gl_contentPane.createSequentialGroup()
-														.addComponent(btnNewButton_3, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-														.addGap(34))
-													.addGroup(gl_contentPane.createSequentialGroup()
-														.addComponent(btnImage, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-														.addPreferredGap(ComponentPlacement.RELATED))))))
-									.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-									.addContainerGap())
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-									.addGap(33))))))
+							.addGap(173)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnClass, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnSamplecode, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnImage, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+								.addComponent(btnSend, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

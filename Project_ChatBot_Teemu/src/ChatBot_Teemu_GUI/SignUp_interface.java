@@ -109,9 +109,11 @@ public class SignUp_interface extends GUI implements FrameController{
 			public void mousePressed(MouseEvent arg0) {
 				
 				//duplication check
-				if(frame.UnameDupcheck() == false)
+				if(frame.UnameDupcheck() == 1)
+					JOptionPane.showMessageDialog(null, "User ID is Empty!!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+				else if(frame.UnameDupcheck() == 2)
 					JOptionPane.showMessageDialog(null, textField.getText() + " is already exsist User ID!", "Warning", JOptionPane.INFORMATION_MESSAGE);
-				else if(frame.UnameDupcheck() == true)
+				else if(frame.UnameDupcheck() == 3)
 				{
 					try {
 						
@@ -127,6 +129,8 @@ public class SignUp_interface extends GUI implements FrameController{
 				
 						bw.append(line+"\n");
 						bw.close();
+						
+						JOptionPane.showMessageDialog(null,"User name"+ textField.getText() + " is Created succesfully!", "Anouncement", JOptionPane.INFORMATION_MESSAGE);
 					
 						
 						//create new user name text file
@@ -145,6 +149,10 @@ public class SignUp_interface extends GUI implements FrameController{
 						
 						fw2.close();
 						
+						
+						//reset select button panel
+						Select_Interface si = Select_Interface.getSelect_Interface();
+						si.ButtonCreater(si.getpanel());
 	
 						
 					} catch (FileNotFoundException e) {
@@ -154,7 +162,7 @@ public class SignUp_interface extends GUI implements FrameController{
 						e.printStackTrace();
 					}
 					
-					
+					textField.setText("");
 				}
 			}
 		});
@@ -176,9 +184,11 @@ public class SignUp_interface extends GUI implements FrameController{
 		JButton btnCheck = new JButton("Duplication Check");
 		btnCheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(frame.UnameDupcheck() == false)
+				if(frame.UnameDupcheck() == 1)
+					JOptionPane.showMessageDialog(null, "User ID is Empty!!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+				else if(frame.UnameDupcheck() == 2)
 					JOptionPane.showMessageDialog(null, textField.getText() + " is already exsist User ID!", "Warning", JOptionPane.INFORMATION_MESSAGE);
-				else if(frame.UnameDupcheck() == true)
+				else if(frame.UnameDupcheck() == 3)
 					JOptionPane.showMessageDialog(null, textField.getText() + " is OK!", "Ok", JOptionPane.INFORMATION_MESSAGE);
 			}
 		});
@@ -204,37 +214,41 @@ public class SignUp_interface extends GUI implements FrameController{
 		frame.setVisible(false);
 	}
 
-	public boolean UnameDupcheck()
+	public int UnameDupcheck()
 	{
+		if(textField.getText().compareTo("")==0)
+			return 1;
+		else
+		{
+			try {
+				
+				File userfile = new File("User.txt");
+				
+				FileReader reader = new FileReader(userfile);
+				
+				BufferedReader br = new BufferedReader(reader);
+				
+				String line;
+				
+				while((line = br.readLine()) != null)
+				{
+					if(line.compareTo(textField.getText())==0)
+						return 2;
+				}
+				
+				reader.close();
+				br.close();
+				
+			} catch (FileNotFoundException e) {
+				
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		}
 		
-		try {
-			
-			File userfile = new File("User.txt");
-			
-			FileReader reader = new FileReader(userfile);
-			
-			BufferedReader br = new BufferedReader(reader);
-			
-			String line;
-			
-			while((line = br.readLine()) != null)
-			{
-				if(line.compareTo(textField.getText())==0)
-					return false;
-			}
-			
-			reader.close();
-			br.close();
-			
-		} catch (FileNotFoundException e) {
-			
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		return true;
+		return 3;
 	}
 	
 
