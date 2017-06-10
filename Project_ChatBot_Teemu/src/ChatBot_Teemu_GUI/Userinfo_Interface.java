@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ChatBot_Teemu_User.User;
+import ChatBot_Teemu_User.UserReader;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -36,6 +37,13 @@ public class Userinfo_Interface extends GUI {
 	private JTextField textField;
 	private Chatting_interface chatinterface = new Chatting_interface().getChatting_interface();
 	private User user;
+	private UserReader userrd;
+	private Modify_Interface imagepop;
+	private JPanel panel;
+
+	public void setPanel(File name) {
+		this.panel = new ImgPanel(name);
+	}
 
 	/**
 	 * Launch the application.
@@ -63,29 +71,10 @@ public class Userinfo_Interface extends GUI {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		String username = chatinterface.getUser();
-		File userFile = new File(username+".txt");
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream(userFile);
-			ObjectInputStream ois = new ObjectInputStream(fis);
-		    Object o = ois.readObject();
-		    if(o instanceof User){
-		    	user = (User)o;
-		    }
-			
-		} catch (FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		
-		;
+		this.setUsername();
 		// Image section
 		File imgfile = user.getUser_image();
-		JPanel panel = new ImgPanel(imgfile);
+		panel =new ImgPanel(imgfile);
 		panel.setVisible(true);
 		
 		JLabel lblName = new JLabel("Name :");
@@ -104,21 +93,15 @@ public class Userinfo_Interface extends GUI {
 		
 		JButton btnExit = new JButton("Exit");
 		
-		JButton btnSave = new JButton("Save");
-		btnSave.addActionListener(new ActionListener() {
-
-			@Override
+		JButton btnChangeImage = new JButton("Change Image");
+		btnChangeImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				imagepop = new Modify_Interface().getInterface();
+				imagepop.setVisible(true);
 				
 			}
 		});
 		
-		JButton btnChangeImage = new JButton("Change Image");
-		btnChangeImage.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -132,23 +115,19 @@ public class Userinfo_Interface extends GUI {
 							.addComponent(btnChangeImage)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblQuizProgress)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(progressBar_1, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
-								.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnSave)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnExit))))
+						.addComponent(lblQuizProgress)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+							.addComponent(progressBar_1, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+							.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 227, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnExit))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(1)
 							.addComponent(lblLectureProgress)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(30, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -160,22 +139,19 @@ public class Userinfo_Interface extends GUI {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnChangeImage))
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-									.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-								.addGap(28)
-								.addComponent(lblQuizProgress)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(28)
+							.addComponent(lblQuizProgress)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(lblLectureProgress)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(progressBar_1, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnExit)
-						.addComponent(btnSave))
+					.addComponent(btnExit)
 					.addGap(28))
 		);
 		contentPane.setLayout(gl_contentPane);
@@ -187,5 +163,26 @@ public class Userinfo_Interface extends GUI {
 			frame = new Userinfo_Interface();
 		
 		return frame;
+	}
+	public void setUsername(){
+		String username = chatinterface.getUser();
+		File userFile = new File(username+".txt");
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(userFile);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+		    Object o = ois.readObject();
+		    if(o instanceof User){
+		    	user = (User)o;
+		    }
+			
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
 	}
 }

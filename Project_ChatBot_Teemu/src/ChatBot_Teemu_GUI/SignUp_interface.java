@@ -206,7 +206,8 @@ public class SignUp_interface extends GUI implements FrameController, Serializab
 							JOptionPane.showMessageDialog(null, "Choose Image!!", "Warning", JOptionPane.INFORMATION_MESSAGE);
 						}
 						oos.writeObject(user);
-						
+						oos.close();
+						fos.close();
 					//	fw1.close();
 						
 						//create new chat log text file

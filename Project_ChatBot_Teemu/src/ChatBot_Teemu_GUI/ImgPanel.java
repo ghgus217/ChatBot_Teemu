@@ -24,5 +24,8 @@ public class ImgPanel extends JPanel {
 	g.drawImage(image, 0,0, null);
 	}
 
+	public void setImage(File file){
+		img = file;
+	}
 }
 	

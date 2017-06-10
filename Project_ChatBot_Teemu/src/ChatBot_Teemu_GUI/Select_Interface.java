@@ -51,6 +51,11 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 	JPanel contentPane;
 	JPanel panel = new JPanel();
 	JButton bt;
+	private String username;
+	public String getUsername() {
+		return username;
+	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -99,7 +104,7 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 				bt = new JButton();
 				bt.setText(line);
 				
-				String username = line;
+				username = line;
 				
 				bt.addMouseListener(new MouseAdapter(){
 					@Override
@@ -135,7 +140,7 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 		JScrollPane scr = new JScrollPane(panel);
 		JLabel lblNewLabel = new JLabel("Choose User");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("±¼¸²", Font.BOLD, 20));
+		lblNewLabel.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 20));
 		
 		JButton btnNewButton = new JButton("Back\r\n");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -150,7 +155,7 @@ public class Select_Interface extends GUI implements FrameController,ButtonContr
 				frame.setVisible(false);
 			}
 		});
-		btnNewButton.setFont(new Font("±¼¸²", Font.BOLD, 20));
+		btnNewButton.setFont(new Font("ï¿½ï¿½ï¿½ï¿½", Font.BOLD, 20));
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
