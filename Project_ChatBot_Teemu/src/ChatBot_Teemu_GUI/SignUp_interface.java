@@ -1,5 +1,6 @@
 package ChatBot_Teemu_GUI;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -9,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 import ChatBot_Teemu_User.User;
 
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
@@ -19,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
@@ -30,15 +35,28 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class SignUp_interface extends GUI implements FrameController{
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+
+public class SignUp_interface extends GUI implements FrameController, Serializable{
 
 	private static SignUp_interface frame;
 	
 	private JPanel contentPane;
 	private JTextField textField;
 	private JComboBox comboBox;
+	private Select_Image selimg;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private User user;
+	private File airplane = new File("Airplane.jpg");
+	private File dog = new File("Dog.jpg");
+	private File cat = new File("Cat.jpg");
 
+	
+
+	
 	/**
 	 * Launch the application.
 	 */
@@ -62,7 +80,7 @@ public class SignUp_interface extends GUI implements FrameController{
 		
 		setTitle("Chat Bot Teemu");
 		
-		setBounds(100, 100, 483, 384);
+		setBounds(100, 100, 483, 330);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -71,39 +89,73 @@ public class SignUp_interface extends GUI implements FrameController{
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setAlignment(FlowLayout.LEFT);
 		
-		JPanel panel_1 = new JPanel();
+		JPanel panel_1 = new Select_Image();
 		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
 		flowLayout_1.setAlignment(FlowLayout.LEFT);
 		
-		JLabel lblChooseUserIcon = new JLabel("Choose User Icon");
-		panel_1.add(lblChooseUserIcon);
-		
 		JPanel panel_2 = new JPanel();
 		FlowLayout flowLayout_2 = (FlowLayout) panel_2.getLayout();
+		
+		JLabel lblChooseUserIcon = new JLabel("Choose User Icon");
+		
+		JRadioButton airplaneRad = new JRadioButton("");
+		buttonGroup.add(airplaneRad);
+		
+		JRadioButton dogRad = new JRadioButton("");
+		buttonGroup.add(dogRad);
+		
+		JRadioButton catRad = new JRadioButton("");
+		buttonGroup.add(catRad);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(panel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lblChooseUserIcon))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+							.addContainerGap(291, Short.MAX_VALUE)
+							.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(42)
+							.addComponent(airplaneRad)
+							.addGap(80)
+							.addComponent(dogRad, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+							.addGap(79)
+							.addComponent(catRad, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap()
+					.addGap(16)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblChooseUserIcon)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(airplaneRad)
+						.addComponent(dogRad)
+						.addComponent(catRad))
 					.addGap(18)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addContainerGap(129, Short.MAX_VALUE))
 		);
-		
+	
 		JButton btnOk = new JButton("OK");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
@@ -123,6 +175,7 @@ public class SignUp_interface extends GUI implements FrameController{
 						FileWriter writer = new FileWriter(userfile,true); 
 						
 						BufferedWriter bw = new BufferedWriter(writer);
+					
 						
 						String line = textField.getText();
 						
@@ -135,11 +188,26 @@ public class SignUp_interface extends GUI implements FrameController{
 						
 						//create new user name text file
 						File newuser = new File(line+".txt");
-						FileWriter fw1 = new FileWriter(newuser);
-					
-						fw1.write(line+"\n");
+					//	FileWriter fw1 = new FileWriter(newuser);
 						
-						fw1.close();
+						FileOutputStream fos = new FileOutputStream(newuser);
+						ObjectOutputStream oos = new ObjectOutputStream(fos);
+						
+						if(dogRad.isSelected()){
+						user=new User(line, dog);
+						}
+						else if(catRad.isSelected()){
+						user=new User(line, cat);	
+						}
+						else if(airplaneRad.isSelected()){
+						user=new User(line, airplane);
+						}
+						else{
+							JOptionPane.showMessageDialog(null, "Choose Image!!", "Warning", JOptionPane.INFORMATION_MESSAGE);
+						}
+						oos.writeObject(user);
+						
+					//	fw1.close();
 						
 						//create new chat log text file
 						File newchatlog = new File(line+"clog.txt");
@@ -170,10 +238,7 @@ public class SignUp_interface extends GUI implements FrameController{
 		
 		JButton btnCancel = new JButton("Cancel");
 		panel_2.add(btnCancel);
-		
-		comboBox = new JComboBox();
-		panel_1.add(comboBox);
-		
+				
 		JLabel lblUserName = new JLabel("User Name :");
 		panel.add(lblUserName);
 		
@@ -250,6 +315,4 @@ public class SignUp_interface extends GUI implements FrameController{
 		
 		return 3;
 	}
-	
-
 }

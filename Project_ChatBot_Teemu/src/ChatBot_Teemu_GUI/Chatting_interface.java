@@ -37,7 +37,7 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 	
 	Translator ts = new Translator();
 
-	String user;
+	private String user;
 
 	/**
 	 * Launch the application.
@@ -233,6 +233,9 @@ public class Chatting_interface extends GUI implements FrameController,ButtonCon
 	{
 		if(user != null)
 			this.user = user;
+	}
+	public String getUser(){
+		return user;
 	}
 
 	@Override
