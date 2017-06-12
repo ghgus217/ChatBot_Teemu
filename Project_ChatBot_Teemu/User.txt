@@ -1,1 +1,7 @@
+<<<<<<< HEAD
 hello
+=======
+ddd
+aaa
+hehe
+>>>>>>> branch 'master' of https://github.com/ghgus217/ChatBot_Teemu.git
