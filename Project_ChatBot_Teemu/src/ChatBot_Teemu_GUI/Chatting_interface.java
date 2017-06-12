@@ -22,6 +22,7 @@ public class Chatting_interface extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	Userinfo_Interface uii;
+	Lecture_interface uil;
 
 	/**
 	 * Launch the application.
@@ -84,8 +85,12 @@ public class Chatting_interface extends JFrame {
 		btnHelp.setFont(font);
 		
 		JButton btnSdkjsakdalsjkdlkjas = new JButton("Lecture");
-		btnSdkjsakdalsjkdlkjas.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnSdkjsakdalsjkdlkjas.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				uil = new Lecture_interface();
+				uil.setVisible(true);
+				
 			}
 		});
 		btnSdkjsakdalsjkdlkjas.setFont(font);

@@ -1,0 +1,5 @@
+1. First touch to Java
+2. Object orientation
+3. Know your variabales
+4. Java API
+5. Object behavior, encapsulation
