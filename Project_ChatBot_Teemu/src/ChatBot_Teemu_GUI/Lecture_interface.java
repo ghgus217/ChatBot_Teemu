@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -24,6 +25,11 @@ public class Lecture_interface extends JFrame {
 	private JPanel contentPane;
 
 	static Lecture_interface frame;
+
+	int i = 1;
+	int j = 1;
+	int k = 1;
+
 	/**
 	 * Launch the application.
 	 */
@@ -39,10 +45,6 @@ public class Lecture_interface extends JFrame {
 			}
 		});
 	}
-	
-	int i = 1;
-	int j = 1;
-	int k = 1;
 
 	/**
 	 * Create the frame.
@@ -69,124 +71,119 @@ public class Lecture_interface extends JFrame {
 		panel_unit.setLayout(new GridLayout(10, 1, 0, 0));
 
 		JPanel panel_innerunit = new JPanel();
-		panel_innerunit.setBorder(new TitledBorder(null, "Inner Unit", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_innerunit
+				.setBorder(new TitledBorder(null, "Inner Unit", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panel_innerunit);
 		panel_innerunit.setLayout(new GridLayout(10, 1, 0, 0));
 
-		
-		//fileReader
-		/*try {
-			JButton bt_c;
-			File chapterFile = new File("chapter.txt");
-			FileReader reader_c;
-			reader_c = new FileReader(chapterFile);
-			BufferedReader br_c = new BufferedReader(reader_c);
-			String line_c;
-			
-			while((line_c = br_c.readLine()) != null){
-				bt_c = new JButton();
-				bt_c.setText(line_c);
-				panel_chapter.add(bt_c);
-			}
-			
-			br_c.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-		
-		
 		// fileReader
+
+		// show chapter panel
 		try {
+			// reading chapter names from textFile
 			JButton bt_c;
 			File chapterFile = new File("chapter.txt");
 			FileReader reader_c = new FileReader(chapterFile);
 			BufferedReader br_c = new BufferedReader(reader_c);
 			String line_c;
 
-			for (i = 1; (line_c = br_c.readLine()) != null; i++) {
-
+			// create chapter buttons and set text with while loop
+			while ((line_c = br_c.readLine()) != null) {
 				bt_c = new JButton();
 				bt_c.setText(line_c);
+				panel_chapter.add(bt_c);				
 
+				// addMouselistener for each button
 				bt_c.addMouseListener(new MouseAdapter() {
+
 					@Override
-					public void mousePressed(MouseEvent arg0) {
+					public void mousePressed(MouseEvent e) {
 						panel_unit.removeAll();
 						panel_innerunit.removeAll();
 
+						JButton clickedChapter = (JButton) e.getSource();
+						String unitName = clickedChapter.getText();
+
+						// show unit panel
 						try {
+							// reading unit names from textFile
 							JButton bt_u;
-							File unitFile = new File("chapter_" + i +".txt");
+							File unitFile = new File(unitName + ".txt");
 							FileReader reader_u;
 							reader_u = new FileReader(unitFile);
 							BufferedReader br_u = new BufferedReader(reader_u);
 							String line_u;
 
-							for (j = 1; (line_u = br_u.readLine()) != null; j++) {
-
+							// create unit buttons and set text with while loop
+							while ((line_u = br_u.readLine()) != null) {
 								bt_u = new JButton();
 								bt_u.setText(line_u);
+								panel_unit.add(bt_u);
 
+								// addMouselistener for each button
 								bt_u.addMouseListener(new MouseAdapter() {
 									@Override
-									public void mousePressed(MouseEvent arg0) {
+									public void mousePressed(MouseEvent e) {
 										panel_innerunit.removeAll();
 
+										JButton clickedUnit = (JButton) e.getSource();
+										String innerUnitName = clickedUnit.getText();
+
+										// show innerUnit panel
 										try {
+											// reading innerUnit name from textFile											
 											JButton bt_iu;
-											File innerunitFile = new File(i + "_" + j + ".txt");
+											File innerunitFile = new File(innerUnitName + ".txt");
 											FileReader reader_iu;
 											reader_iu = new FileReader(innerunitFile);
 											BufferedReader br_iu = new BufferedReader(reader_iu);
 											String line_iu;
 
-											for (k = 1; (line_iu = br_iu.readLine()) != null; k++) {
-
+											// create innerUnit buttons and set text with while loop
+											while((line_iu = br_iu.readLine()) != null) {
 												bt_iu = new JButton();
 												bt_iu.setText(line_iu);
+												panel_innerunit.add(bt_iu);
 
+												// addMouselistener for each button
 												bt_iu.addMouseListener(new MouseAdapter() {
 													@Override
 													public void mousePressed(MouseEvent arg0) {
 														System.out.println("No Errors");
 													}
-												});
-												panel_innerunit.add(bt_iu);
+												});												
 											}
-											
+
 											br_iu.close();
-										} catch (FileNotFoundException e) {
+										} catch (FileNotFoundException f) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
-										} catch (IOException e) {
+											f.printStackTrace();
+										} catch (IOException f) {
 											// TODO Auto-generated catch block
-											e.printStackTrace();
+											f.printStackTrace();
 										}
+										
+										panel_innerunit.validate();
 
 									}
 								});
-								panel_unit.add(bt_u);
+
 							}
-							
 							br_u.close();
-						} catch (FileNotFoundException e) {
+						} catch (FileNotFoundException f) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (IOException e) {
+							f.printStackTrace();
+						} catch (IOException f) {
 							// TODO Auto-generated catch block
-							e.printStackTrace();
+							f.printStackTrace();
 						}
+						
+						panel_unit.validate();
+						panel_innerunit.validate();
 
 					}
 				});
-				panel_chapter.add(bt_c);
 			}
-
 			br_c.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block

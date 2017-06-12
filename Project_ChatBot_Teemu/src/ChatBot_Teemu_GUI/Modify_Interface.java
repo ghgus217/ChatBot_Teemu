@@ -28,10 +28,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.awt.event.ActionEvent;
 
-public class Modify_Interface extends JFrame {
+public class Modify_Interface extends GUI {
 	
 	private static Modify_Interface frame;
-	private Chatting_interface chatinterface = new Chatting_interface().getChatting_interface();
+	private Chatting_interface chatinterface;
 	private String username;
 	private JPanel contentPane;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -50,11 +50,11 @@ public class Modify_Interface extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void go(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					frame = new Modify_Interface();
+					frame = Modify_Interface.getInterface();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,8 +67,10 @@ public class Modify_Interface extends JFrame {
 	 * Create the frame.
 	 */
 	public Modify_Interface() {
+		setTitle("Change image");
+		chatinterface = Chatting_interface.getChatting_interface();
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 431, 270);
+		setBounds(100, 100, 450, 297);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -92,6 +94,7 @@ public class Modify_Interface extends JFrame {
 			if(o instanceof User){
 				user = (User)o;
 			}
+			ois.close();
 			
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
@@ -112,6 +115,16 @@ public class Modify_Interface extends JFrame {
 					File imgfile = new File("Airplane.jpg");
 					File newfile = new File(username+".txt");
 					this.modifyImage(newfile, imgfile);
+					
+					Userinfo_Interface ui = Userinfo_Interface.getUserinfo_Interface();
+					ImgPanel panel = ui.getpanel();
+					panel.setImage(imgfile);
+					
+					if(ui.isVisible() == true)
+					{
+						ui.setVisible(false);
+						ui.setVisible(true);
+					}
 
 					frame.setVisible(false);
 					
@@ -120,6 +133,15 @@ public class Modify_Interface extends JFrame {
 					File imgfile = new File("Dog.jpg");
 					File newfile = new File(username+".txt");
 					this.modifyImage(newfile, imgfile);
+					Userinfo_Interface ui = Userinfo_Interface.getUserinfo_Interface();
+					ImgPanel panel = ui.getpanel();
+					panel.setImage(imgfile);
+
+					if(ui.isVisible() == true)
+					{
+						ui.setVisible(false);
+						ui.setVisible(true);
+					}
 
 					
 					frame.setVisible(false);
@@ -129,6 +151,16 @@ public class Modify_Interface extends JFrame {
 					File imgfile = new File("Cat.jpg");
 					File newfile = new File(username+".txt");
 					this.modifyImage(newfile, imgfile);
+					
+					Userinfo_Interface ui = Userinfo_Interface.getUserinfo_Interface();
+					ImgPanel panel = ui.getpanel();
+					panel.setImage(imgfile);
+					
+					if(ui.isVisible() == true)
+					{
+						ui.setVisible(false);
+						ui.setVisible(true);
+					}
 
 
 					frame.setVisible(false);
@@ -160,7 +192,8 @@ public class Modify_Interface extends JFrame {
 					e.printStackTrace();
 				}
 			}
-
+			
+			
 		});
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -210,4 +243,11 @@ public class Modify_Interface extends JFrame {
 			frame = new Modify_Interface();
 		return frame;
 	}
+	
+	
+	public JPanel getcontentPane()
+	{
+		return this.contentPane;
+	}
+	
 }
